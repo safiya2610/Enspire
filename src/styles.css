@@ -1,0 +1,171 @@
+:root {
+  --glow-color: hsl(181, 69%, 51%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Raleway", sans-serif;
+}
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 200px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.btn-container {
+  display: flex;
+  gap: 15px;
+}
+
+.signup {
+  width: 140px;
+  height: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.7px;
+  animation: float 3s infinite ease-in-out alternate;
+  cursor: pointer;
+  color: var(--glow-color);
+  padding: 0.35em 1em;
+  border: 0.15em solid var(--glow-color);
+  perspective: 2em;
+  font-weight: 900;
+  box-shadow: inset 0px 0px 0.5em 0px var(--glow-color), 0px 0px 0.5em 0px var(--glow-color);
+}
+
+.signup .glowing-txt {
+  float: left;
+  margin-right: -0.8em;
+  text-shadow: 0 0 0.125em hsl(0, 0%, 100% / 0.3), 0 0 0.45em var(--glow-color);
+}
+
+.signup::before,
+.signup::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.signup::before {
+  opacity: 0.7;
+  filter: blur(1em);
+  transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
+  background: var(--glow-color);
+  pointer-events: none;
+}
+
+.signup::after {
+  opacity: 0;
+  z-index: -1;
+  background-color: var(--glow-color);
+  box-shadow: 0 0 2em 0.2em var(--glow-color);
+  transition: opacity 100ms linear;
+}
+.signup:hover {
+  color: rgba(0, 0, 0, 0.8);
+  text-shadow: none;
+}
+
+.signup:hover:before {
+  filter: blur(1.5em);
+}
+
+.signup:hover:after {
+  opacity: 1;
+}
+
+@keyframes float {
+  0% {
+      transform: translateY(0px);
+      box-shadow: 0 20px 12px -18px rgba(0, 0, 0, 0.1), 0 60px 20px -12px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+      transform: translateY(20px);
+      box-shadow: 0 20px 10px 18px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (max-width: 600px) {
+  .signup {
+      font-size: 1em;
+  }
+}
+
+.rotating-box {
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  margin-top: 30px;
+  perspective: 800px;
+
+}
+
+.single-rb {
+  width: 400px;
+  height: 400px;
+  animation: rotate 15s linear infinite;
+  transform-style: preserve-3d;
+  margin-top: 120px;
+  transition: transform 0.3s ease;
+}
+
+.single-rb img {
+  height: 400px;
+  width: 400px;
+}
+
+.single-rb div {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+}
+
+.front-side {
+  transform: translateZ(200px);
+}
+
+.back-side {
+  transform: rotateY(180deg) translateZ(200px);
+}
+
+.left-side {
+  transform: rotateY(-90deg) translateX(-200px);
+  transform-origin: left;
+}
+
+.right-side {
+  transform: rotateY(90deg) translateX(200px);
+  transform-origin: right;
+}
+@keyframes rotate {
+  0% {
+      transform: rotateY(0deg);
+  }
+  100% {
+      transform: rotateY(360deg);
+  }
+}
+
+.rotating-box:hover .single-rb {
+  animation-play-state: paused;
+  transform: scale(0.95);
+}
